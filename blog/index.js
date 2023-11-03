@@ -1,0 +1,23 @@
+const express = require("express")
+const connect = require("./config/db")
+const router = require("./routes/user.route")
+const app = express()
+app.set("view engine", "ejs")
+app.set("viwes", __dirname + "/views")
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+const cookie = require("cookie-parser")
+app.use(cookie())
+const session = require("express-session")
+const passport = require("passport")
+const local = require("./helper/local")
+app.use(session({secret : "key"}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use("/user",router)
+
+
+app.listen(8090, ()=>{
+    connect()
+    console.log("port is satart 8090")
+})
