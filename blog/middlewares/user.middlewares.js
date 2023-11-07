@@ -5,7 +5,7 @@ const scheck = (req , res , next) =>{
         next()
     }
     else{
-        res.send({message : "All fields required"})
+        res.send({message : "Invalid Credentials."})
     }
 }
 
